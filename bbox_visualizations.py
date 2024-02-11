@@ -59,7 +59,7 @@ def read_dicom_series(file_dir):
 
 
 
-def visualize_dicoms(scan_dir, time_point, prob_lb = 0.7, prob_ub = 1.0, visualize = True):
+def read_dicom_detections(scan_dir, time_point, prob_lb = 0.7, prob_ub = 1.0, visualize = True):
 	patient_id = scan_dir.split('/')[-3]	
 	candidates_df = pd.read_csv(candidate_csv).values.tolist()
 	scan_detections = [x for x in candidates_df if (str(x[0]) == patient_id and str(x[1]) == str(time_point))] # list of pseudo labels for the patient 
@@ -104,8 +104,8 @@ def visualize_dicoms(scan_dir, time_point, prob_lb = 0.7, prob_ub = 1.0, visuali
 	
 
 if __name__ == "__main__":
-	scan_dir = "./Files/NLST_Scan/100026/01-02-2000-NA-NLSTLSS-32628/2.000000-1OPAGELS16B3972.51200.00.0null-57666"
-	time_point = 1
-	prob_lb = 0.1
+	scan_dir = './Files/NLST_Scan/100035/01-02-1999-NA-NLSTLSS-01795/2.000000-0OPAGEHSQXD3002.512064.00.11.5-24297'
+	time_point = 0
+	prob_lb = 0.7
 	prob_ub = 1.0
-	numpy_scan, detections = visualize_dicoms(scan_dir, time_point, prob_lb, prob_ub, True)
+	numpy_scan, detections = read_dicom_detections(scan_dir, time_point, prob_lb, prob_ub, True)
